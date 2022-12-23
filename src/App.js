@@ -11,6 +11,7 @@ function App() {
 
   const [buttonPressed, setButtonPressed] = useState(null);
   const [stateIndex, setStateIndex] = useState(0);
+  const [updatedTime, setUpdatedTime] = useState(0);
 
   const moveState = () => {
     if (stateIndex === state.length - 1) return;
@@ -24,11 +25,25 @@ function App() {
     setStateIndex(stateIndex - 1);
   }
 
+  const updateTime = (val) => {
+    setUpdatedTime(val);
+  }
+
+  useEffect(() => {
+    if (updateTime !== 0) {
+      setTimeout(() => {
+        setUpdatedTime(0);
+      }, 0)
+    }
+  }, [updatedTime])
+
   return (
     <Main>
       <Container>
         <Header/>
         <Timer 
+          setUpdatedTime={setUpdatedTime}
+          updatedTime={updatedTime}
           moveState={moveState}
           stateWarn={state[stateIndex].warn}
           stateTime={state[stateIndex].time}
@@ -36,6 +51,7 @@ function App() {
           setButtonPressed={setButtonPressed}
           />
         <Controls 
+          updateTime={updateTime}
           moveState={moveState}
           setButtonPressed={setButtonPressed}
           buttonPressed={buttonPressed}

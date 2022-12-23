@@ -3,18 +3,30 @@ import styled from 'styled-components'
 import ReactDOM from 'react-dom';
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
-const Timer = ({buttonPressed, setButtonPressed, stateTime, moveState, stateWarn}) => {
+const Timer = ({buttonPressed, setButtonPressed, stateTime, moveState, updatedTime}) => {
 
     const [isActive, setIsActive] = useState(false);
     const [key, setKey] = useState(0);
     const [alertColor, setAlertColor] = useState("#5a1512");
+    const [timeAmt, setTimeAmt] = useState(0);
+
+
+    useEffect(() => {
+        setTimeAmt(stateTime);
+    }, [stateTime])
+
+    useEffect(() => {
+        if (updatedTime !== 0) {
+            setTimeAmt(timeAmt + updatedTime);
+        }
+    }, [updatedTime])
+
 
     useEffect(() => {
         if (buttonPressed) {
             handleButtonPress(buttonPressed);
         }
     }, [buttonPressed])
-
 
 
     const handleButtonPress = (pressed) => {
@@ -40,6 +52,7 @@ const Timer = ({buttonPressed, setButtonPressed, stateTime, moveState, stateWarn
 
     const handleResetTimer = () => {
         setButtonPressed(null);
+        setTimeAmt(stateTime)
         setKey(prevKey => prevKey + 1);
         handlePauseClick();
     }
@@ -67,10 +80,6 @@ const Timer = ({buttonPressed, setButtonPressed, stateTime, moveState, stateWarn
         let seconds = remainingTime % 60
         if (seconds < 10) seconds = "0" + seconds;
 
-        if (stateWarn && minutes <= 0) {
-            setAlertColor("#A30000");
-        }
-      
         return `${minutes}:${seconds}`
       }
 
@@ -82,9 +91,9 @@ const Timer = ({buttonPressed, setButtonPressed, stateTime, moveState, stateWarn
             children={() => children}
             strokeWidth={32}
             isPlaying={isActive}
-            duration={stateTime}
+            duration={timeAmt}
             colors={['#5a1512', '#F7B801', '#A30000', '#A30000']}
-            colorsTime={[stateTime, stateTime/2, stateTime/4, 0]}
+            colorsTime={[timeAmt, timeAmt/2, timeAmt/4, 0]}
             onComplete={handleStateChange}
             >
                 {children}

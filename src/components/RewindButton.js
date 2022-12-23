@@ -11,9 +11,12 @@ const RewindButton = ({setButtonPressed}) => {
   }
 
   return (
+    <Main>
     <Container onClick={handleClick}>
       <VscDebugRestart style={{ stroke: "white", strokeWidth: "0.35", fontSize: "1.6em"}}/>
     </Container>
+    <Shadow/>
+    </Main>
   )
 }
 
@@ -36,7 +39,31 @@ const Container = styled.div`
     cursor: pointer;
 
     :active {
-        scale: 0.85;
+        transform: translateY(7px);
+        //scale: 0.85;
         cursor: pointer;
     }
+`
+
+const Main = styled.div`
+  height: 100%;
+  position: relative;
+  
+`
+
+const Shadow = styled.div`
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 1.5em;
+    height: 75px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #945854;
+    color: white;
+    margin: 10px;
+    position: absolute;
+    top: 7px;
+    z-index: -1;
 `

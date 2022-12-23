@@ -25,28 +25,31 @@ const PlayButton = ({title, setButtonPressed, buttonPressed}) => {
   }
 
   return (
-    <Container onClick={handleClick}>
-        {!firstClicked && <>{title}</>}
-        {active &&
-            <IconContext.Provider
-                value={{ color: 'white', size: '1.5em' }}
-                >
-                <div>
-                    <FaPause />
-                </div>
-            </IconContext.Provider>
-        }
+    <Main>
+      <Container onClick={handleClick}>
+          {!firstClicked && <>{title}</>}
+          {active &&
+              <IconContext.Provider
+                  value={{ color: 'white', size: '1.5em' }}
+                  >
+                  <div>
+                      <FaPause />
+                  </div>
+              </IconContext.Provider>
+          }
 
-        {!active && firstClicked && 
-            <IconContext.Provider
-                value={{ color: 'white', size: '1.5em' }}
-                >
-                <div>
-                    <FaPlay />
-                </div>
-            </IconContext.Provider>
-        }
-    </Container>
+          {!active && firstClicked && 
+              <IconContext.Provider
+                  value={{ color: 'white', size: '1.5em' }}
+                  >
+                  <div>
+                      <FaPlay />
+                  </div>
+              </IconContext.Provider>
+          }
+      </Container>
+      <Shadow/>
+    </Main>
   )
 }
 
@@ -63,12 +66,37 @@ const Container = styled.div`
     justify-content: center;
     background-color: rgb(90, 21, 18);
     color: white;
-    transition-duration: 0.2s;
+    transition-duration: 0.1s;
+    animation-timing-function: ease;
     margin: 10px;
     cursor: pointer;
 
     :active {
-        scale: 0.85;
+        transform: translateY(7px);
+        //scale: 0.85;
         cursor: pointer;
     }
+`
+
+const Main = styled.div`
+  height: 100%;
+  position: relative;
+  
+`
+
+const Shadow = styled.div`
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 1.5em;
+    height: 75px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #945854;
+    color: white;
+    margin: 10px;
+    position: absolute;
+    top: 7px;
+    z-index: -1;
 `
