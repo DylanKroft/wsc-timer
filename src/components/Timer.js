@@ -86,10 +86,10 @@ const Timer = ({buttonPressed, setButtonPressed, stateTime, moveState, updatedTi
     return (
         <Container alertColor={alertColor}>
             <CountdownCircleTimer
-            size={300}
+            size={320}
             key={key}
             children={() => children}
-            strokeWidth={32}
+            strokeWidth={36}
             isPlaying={isActive}
             duration={timeAmt}
             colors={['#5a1512', '#F7B801', '#A30000', '#A30000']}

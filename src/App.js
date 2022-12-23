@@ -14,15 +14,15 @@ function App() {
   const [updatedTime, setUpdatedTime] = useState(0);
 
   const moveState = () => {
-    if (stateIndex === state.length - 1) return;
-    setStateIndex(stateIndex + 1);
+    if (stateIndex === state.length - 1) setStateIndex(0);
+    else setStateIndex(stateIndex + 1);
     setButtonPressed(2);
   }
 
   const backState = () => {
     setButtonPressed(2);
-    if (stateIndex === 0) return;
-    setStateIndex(stateIndex - 1);
+    if (stateIndex === 0) setStateIndex(state.length - 1);
+    else setStateIndex(stateIndex - 1);
   }
 
   const updateTime = (val) => {
