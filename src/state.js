@@ -1,5 +1,5 @@
 export const state = [
-    {label: "15 Minutes Prep", time: 20, warn: false},
+    {label: "15 Minutes Prep", time: 900, warn: false},
     {label: "1st Affirmative", time: 240, warn: true},
     {label: "1 Minute Prep", time: 60, warn: false},
     {label: "1st Negative", time: 240, warn: true},
